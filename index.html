@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Games</title>
+<meta name="description" content="Small browser games. Pick one and play.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600..800&family=DM+Sans:opsz,wght@9..40,400..600&display=swap">
+<style>
+/* Layout: a short heading, then a shelf of game cards that wraps from one to three columns. */
+:root {
+  --page: #E3E9E5;
+  --card: #F6F8F7;
+  --ink: #16201C;
+  --ink-2: #51625A;
+  --line: #C3CEC8;
+  --mat: #2A5A4D;
+  --mat-line: rgb(255 255 255 / 0.09);
+  --focus: #1F6FD1;
+  --p1: #F3EEE4; --p2: #FBE1C3; --p4: #F8C6A0; --p8: #F4A68C; --p16: #EE97AF; --p32: #D4A0DE; --p64: #B1B2F0;
+  --font-display: "Bricolage Grotesque", ui-rounded, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-body: "DM Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --page: #0C1210; --card: #151D1A; --ink: #E3EAE6; --ink-2: #93A49C; --line: #2B3833;
+    --mat: #173329; --mat-line: rgb(255 255 255 / 0.06); --focus: #7DB2FF;
+    --p1: #3A372F; --p2: #4D3A25; --p4: #5B3824; --p8: #63322A; --p16: #5F2A3E; --p32: #4E2E5B; --p64: #34366C;
+    color-scheme: dark;
+  }
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--page);
+  color: var(--ink);
+  font: 400 16px/1.5 var(--font-body);
+  padding: max(28px, env(safe-area-inset-top, 0px)) max(16px, env(safe-area-inset-right, 0px)) 40px max(16px, env(safe-area-inset-left, 0px));
+}
+main { max-width: 960px; margin: 0 auto; display: grid; gap: 28px; }
+header h1 { margin: 0; font: 800 clamp(34px, 7vw, 52px)/1 var(--font-display); letter-spacing: -0.04em; }
+header p { margin: 8px 0 0; color: var(--ink-2); }
+.shelf { list-style: none; margin: 0; padding: 0; display: grid; gap: 16px; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); }
+.card {
+  display: grid; gap: 14px; height: 100%;
+  padding: 14px 14px 18px; border-radius: 18px;
+  background: var(--card); color: inherit; text-decoration: none;
+  border: 1px solid var(--line);
+  transition: transform 160ms ease, box-shadow 160ms ease;
+}
+.card:hover { transform: translateY(-2px); box-shadow: 0 16px 30px -20px rgb(0 0 0 / 0.45); }
+.card:focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; }
+.preview {
+  aspect-ratio: 16 / 9; border-radius: 12px; background-color: var(--mat);
+  background-image: linear-gradient(var(--mat-line) 1px, transparent 1px), linear-gradient(90deg, var(--mat-line) 1px, transparent 1px);
+  background-size: 12px 12px;
+  display: grid; place-items: center;
+}
+.mini-board { display: grid; grid-template-columns: repeat(3, 34px); gap: 5px; }
+.mini-board span {
+  height: 34px; border-radius: 7px; display: grid; place-items: center;
+  font: 700 15px/1 var(--font-display); color: rgb(0 0 0 / 0.55);
+  box-shadow: 0 2px 0 rgb(0 0 0 / 0.18);
+}
+.mini-board .gap { background: rgb(0 0 0 / 0.2); box-shadow: none; }
+.card h2 { margin: 0 4px; font: 800 24px/1.1 var(--font-display); letter-spacing: -0.03em; }
+.card p { margin: 0 4px; color: var(--ink-2); font-size: 15px; }
+.tags { margin: 0 4px; font-size: 13px; font-weight: 600; color: var(--ink-2); letter-spacing: 0.02em; }
+@media (prefers-color-scheme: dark) { .mini-board span { color: rgb(255 255 255 / 0.75); } }
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <h1>Games</h1>
+    <p>Small browser games. Pick one and play.</p>
+  </header>
+  <!-- To add a game: give it its own folder with an index.html, then copy one <li> below. -->
+  <ul class="shelf">
+    <li>
+      <a class="card" href="twofold/">
+        <div class="preview" aria-hidden="true">
+          <div class="mini-board">
+            <span style="background:var(--p1)">1</span><span style="background:var(--p1)">1</span><span style="background:var(--p2)">2</span>
+            <span style="background:var(--p8)">8</span><span class="gap"></span><span style="background:var(--p4)">4</span>
+            <span style="background:var(--p32)">32</span><span style="background:var(--p16)">16</span><span style="background:var(--p64)">64</span>
+          </div>
+        </div>
+        <h2>Twofold</h2>
+        <p>Merge matching neighbors until one tile is left. Endless puzzles with hints.</p>
+        <p class="tags">Puzzle · 3×3 to 5×5</p>
+      </a>
+    </li>
+  </ul>
+</main>
+</body>
+</html>
